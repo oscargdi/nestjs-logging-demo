@@ -4,7 +4,21 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 @Module({
-  imports: [LoggerModule.forRoot()],
+  imports: [
+    LoggerModule.forRoot({
+      pinoHttp: {
+        autoLogging: false,
+        serializers: {
+          req: () => {
+            return undefined;
+          },
+          res: () => {
+            return undefined;
+          },
+        },
+      },
+    }),
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
