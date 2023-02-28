@@ -1,0 +1,27 @@
+{
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "eamodio.gitlens",
+        "usernamehw.errorlens",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "editor.codeActionsOnSave": {
+          "source.organizeImports": true
+        },
+        "editor.formatOnSave": true,
+        "files.insertFinalNewline": true,
+        "workbench.editor.highlightModifiedTabs": true
+      }
+    }
+  },
+  "dockerComposeFile": "docker-compose.yml",
+  "name": "NestJS project template",
+  "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
+  "service": "app",
+  "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
+}
