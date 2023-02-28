@@ -20,15 +20,15 @@ repos:
   - id: pretty-format-yaml
     args: [--autofix, --preserve-quotes, --indent, '2']
 
-# - repo: local
-#   hooks:
-#   - id: format
-#     name: Formatting
-#     entry: npm run format
-#     language: system
-#     pass_filenames: false
-#   - id: lint
-#     name: Linting
-#     entry: npm run lint
-#     language: system
-#     pass_filenames: false
+- repo: local
+  hooks:
+  - id: format
+    name: Formatting
+    entry: npm run format
+    language: system
+    pass_filenames: false
+  - id: lint
+    name: Linting
+    entry: npm run lint
+    language: system
+    pass_filenames: false
