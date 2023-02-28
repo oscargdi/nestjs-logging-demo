@@ -20,7 +20,7 @@
     }
   },
   "dockerComposeFile": "docker-compose.yml",
-  "name": "NestJS project template",
+  "name": "NestJS logging demo",
   "postCreateCommand": "./.devcontainer/postCreateCommand.sh",
   "service": "app",
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
