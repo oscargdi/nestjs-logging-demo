@@ -32,7 +32,7 @@ This is the reason why including a tracing value is important to retrieve all lo
 
 In this demo project, we implement a middleware that sets a unique id to the request (as `X-Trace-ID` header), which is attached to all log records and it is finally returned to the client in the response.
 
-```json
+```zsh
 {...,"traceId":"f2467efc-47a7-47f7-8e61-5c19d7ab735a",...}
 ```
 
