@@ -1,4 +1,4 @@
 #!/bin/bash
 
-# npm install
+npm install
 pre-commit install
