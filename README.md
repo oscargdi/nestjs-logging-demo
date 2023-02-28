@@ -1,73 +1,51 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# NestJS logging demo
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This demo project shows how to configure logging in NestJS using structured logging approach. The objective is to create useful and meaningful logs that speed up the analysis of application functioning.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Structured logging
 
-## Description
+Trying to search a value or pattern in a bunch of logs can be difficult. There could be different approaches on detailing what happens in a single operation of an application.
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Structured logging is the practice of implementing a consistent, predetermined message format for application logs that allows them to be treated as data sets that can be more easily searched and analyzed than text ([1](https://www.sumologic.com/glossary/structured-logging/))
 
-## Installation
+In this demo project, we use JSON format (using [pino](https://www.npmjs.com/package/nestjs-pino)) to standarize the structure of the log records.
 
-```bash
-$ npm install
+```zsh
+{"level":30,"time":1677627364853,"pid":32692,"hostname":"248ab4be112f","traceId":"8ca06214-25e7-4a66-a9b3-a0e71af76689","context":"AppService","operation":"getHello","result":"success"}
 ```
 
-## Running the app
+> Note: For convenience, when environment variable `NODE_ENV` is set to `local` the logs are formatted to a more friendly format for readibility.
 
-```bash
-# development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+```zsh
+[23:35:07.736] INFO (32251):
+    traceId: "54e89d42-9354-4070-970d-a8ac86419c68"
+    context: "AppService"
+    operation: "getHello"
+    result: "success"
 ```
 
-## Test
+## Log tracing
 
-```bash
-# unit tests
-$ npm run test
+Since an application can generate thousands of log records in a short period of time and logs can be merged from different sources into a single repository, it can become difficult to trace a single operation within tons of text.
 
-# e2e tests
-$ npm run test:e2e
+This is the reason why including a tracing value is important to retrieve all log records related to a single operation.
 
-# test coverage
-$ npm run test:cov
+In this demo project, we implement a middleware that sets a unique id to the request (as `X-Trace-ID` header), which is attached to all log records and it is finally returned to the client in the response.
+
+```json
+{...,"traceId":"f2467efc-47a7-47f7-8e61-5c19d7ab735a",...}
 ```
 
-## Support
+# Development environment
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+1. Install [Docker](https://docs.docker.com/get-docker/) and [VSCode](https://code.visualstudio.com/download)
+2. Go to VSCode extensions and install [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+3. Download this repository and open it with VSCode.
+4. VSCode will prompt if you want to open the project in a devcontainer.
+5. The project should get configured automatically, wait until you see the process finished. Open logs to see progress, you should see a message like below when the setup is done.
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+```zsh
+Done in 495.62s.
+pre-commit installed at .git/hooks/pre-commit
+Done. Press any key to close the terminal.
+```
