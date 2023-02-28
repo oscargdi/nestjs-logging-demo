@@ -12,6 +12,12 @@ import {
   imports: [
     LoggerModule.forRoot({
       pinoHttp: {
+        transport:
+          process.env.NODE_ENV === 'local'
+            ? {
+                target: 'pino-pretty',
+              }
+            : undefined,
         autoLogging: false,
         customProps: (req: Request) => {
           return { traceId: req[TRACE_ID_HEADER] };
