@@ -7,6 +7,7 @@ import {
   TraceIdMiddleware,
   TRACE_ID_HEADER,
 } from './trace-id/trace-id.middleware';
+import { HttpLoggingModule } from './http-logging/http-logging.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import {
         },
       },
     }),
+    HttpLoggingModule,
   ],
   controllers: [AppController],
   providers: [AppService],
