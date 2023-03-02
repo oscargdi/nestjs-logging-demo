@@ -1,4 +1,4 @@
-import { MiddlewareConsumer, Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { Request } from 'express';
 import { LoggerModule } from 'nestjs-pino';
 import { AppController } from './app.controller';
@@ -36,7 +36,7 @@ import {
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {
+export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(TraceIdMiddleware).forRoutes('*');
   }
