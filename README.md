@@ -45,6 +45,33 @@ In this demo project, we implement a middleware that sets a unique id to the req
 {...,"traceId":"f2467efc-47a7-47f7-8e61-5c19d7ab735a",...}
 ```
 
+# Extra: HTTP logging
+
+By default NetsJS `HttpService` does not write any log that allow us to track information about request and response.
+
+In this demo, we include an implementation of the `HttpModule` that overwrites the default one in order to include an interceptor which logs information about request and response object. The log records will comply with structured logging format and will include the corresponding tracing value. By executing the following intruction:
+
+```ts
+this.httpService.get('https://api.publicapis.org/entries');
+```
+
+The logging trace will result like this:
+
+```zsh
+[15:27:33.462] INFO (5654): Sending HTTP request
+    traceId: "3ade9957-47e7-4efc-9ce5-53c80d139aa1"
+    context: "HttpLoggingModule"
+    method: "GET"
+    url: "https://api.publicapis.org/entries"
+[15:27:35.763] INFO (5654): Receiving HTTP response
+    traceId: "3ade9957-47e7-4efc-9ce5-53c80d139aa1"
+    context: "HttpLoggingModule"
+    method: "GET"
+    url: "https://api.publicapis.org/entries"
+    status: 200
+    statusText: "OK"
+```
+
 # Development environment
 
 1. Install [Docker](https://docs.docker.com/get-docker/) and [VSCode](https://code.visualstudio.com/download)
