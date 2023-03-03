@@ -45,6 +45,20 @@ In this demo project, we implement a middleware that sets a unique id to the req
 {...,"traceId":"f2467efc-47a7-47f7-8e61-5c19d7ab735a",...}
 ```
 
+In the HTTP Response headers, you will see something like this:
+
+```http
+HTTP/1.1 200 OK
+X-Powered-By: Express
+X-Trace-ID: f2467efc-47a7-47f7-8e61-5c19d7ab735a
+Content-Type: application/json; charset=utf-8
+Content-Length: 279045
+ETag: W/"44205-FJfX2JTgRutneB+huX4Qtsf64Qc"
+Date: Fri, 03 Mar 2023 15:31:41 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+```
+
 # Extra: HTTP logging
 
 By default NetsJS `HttpService` does not write any log that allow us to track information about request and response.
