@@ -8,17 +8,26 @@ Trying to search a value or pattern in a bunch of logs can be difficult. There c
 
 Structured logging is the practice of implementing a consistent, predetermined message format for application logs that allows them to be treated as data sets that can be more easily searched and analyzed than text ([1](https://www.sumologic.com/glossary/structured-logging/))
 
-In this demo project, we use JSON format (using [pino](https://www.npmjs.com/package/nestjs-pino)) to standarize the structure of the log records.
+In this demo project, we use JSON format (using [pino](https://www.npmjs.com/package/nestjs-pino)) to standarize the structure of the log records. By executing the following intruction:
+
+```ts
+this.logger.info(
+  { operation: 'getHello', result: 'success' },
+  'Data was retrieved successfully',
+);
+```
+
+The logging trace will result like this:
 
 ```zsh
-{"level":30,"time":1677627364853,"pid":32692,"hostname":"248ab4be112f","traceId":"8ca06214-25e7-4a66-a9b3-a0e71af76689","context":"AppService","operation":"getHello","result":"success"}
+{"level":30,"time":1677856514013,"pid":1343,"hostname":"5827f8b5222c","traceId":"926d15da-6fe8-46f5-aab4-2ac7a7cce0ac","context":"AppService","operation":"getHello","result":"success","msg":"Data was retrieved successfully"}
 ```
 
 > Note: For convenience, when environment variable `NODE_ENV` is set to `local` the logs are formatted to a more friendly format for readibility.
 
 ```zsh
-[23:35:07.736] INFO (32251):
-    traceId: "54e89d42-9354-4070-970d-a8ac86419c68"
+[15:19:20.065] INFO (3402): Data was retrieved successfully
+    traceId: "d5b0de3c-3cca-4a75-b904-9751d43a72db"
     context: "AppService"
     operation: "getHello"
     result: "success"

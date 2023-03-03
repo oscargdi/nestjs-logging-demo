@@ -14,7 +14,10 @@ export class AppService {
     const { data } = await firstValueFrom(
       this.httpService.get('https://api.publicapis.org/entries'),
     );
-    this.logger.info({ operation: 'getHello', result: 'success' });
+    this.logger.info(
+      { operation: 'getHello', result: 'success' },
+      'Data was retrieved successfully',
+    );
     return data;
   }
 }
