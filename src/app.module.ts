@@ -3,11 +3,11 @@ import { Request } from 'express';
 import { LoggerModule } from 'nestjs-pino';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { HttpLoggingModule } from './http-logging/http-logging.module';
 import {
   TraceIdMiddleware,
   TRACE_ID_HEADER,
-} from './trace-id/trace-id.middleware';
-import { HttpLoggingModule } from './http-logging/http-logging.module';
+} from './middlewares/trace-id/trace-id.middleware';
 
 @Module({
   imports: [
