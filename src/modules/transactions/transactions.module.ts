@@ -10,7 +10,7 @@ import { TransactionsService } from './transactions.service';
     HttpModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        baseURL: configService.get('SERVICES_BASE_URL'),
+        baseURL: configService.getOrThrow('SERVICES_BASE_URL'),
       }),
       inject: [ConfigService],
     }),
