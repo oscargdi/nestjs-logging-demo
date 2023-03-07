@@ -4,16 +4,15 @@ import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
-export class AppService {
+export class TransactionsService {
   constructor(
     private readonly httpService: HttpService,
-    @InjectPinoLogger(AppService.name) private readonly logger: PinoLogger,
+    @InjectPinoLogger(TransactionsService.name)
+    private readonly logger: PinoLogger,
   ) {}
 
   async getHello(): Promise<any> {
-    const { data } = await firstValueFrom(
-      this.httpService.get('https://api.publicapis.org/entries'),
-    );
+    const { data } = await firstValueFrom(this.httpService.get('/entries'));
     this.logger.info(
       { operation: 'getHello', result: 'success' },
       'Data was retrieved successfully',
