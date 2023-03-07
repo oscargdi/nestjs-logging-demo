@@ -63,7 +63,7 @@ Keep-Alive: timeout=5
 
 By default NetsJS `HttpService` does not write any log that allow us to track information about request and response.
 
-In this demo, we include an implementation of the `HttpModule` that overwrites the default one in order to include an interceptor which logs information about request and response object. The log records will comply with structured logging format and will include the corresponding tracing value. By executing the following intruction:
+In this demo, we include an implementation for the `OnModuleInit` interface which modifies the default `HttpService` in order to include an interceptor which logs information about request and response object. The log records will comply with structured logging format and will include the corresponding tracing value. By executing the following intruction:
 
 ```ts
 this.httpService.get('https://api.publicapis.org/entries');
