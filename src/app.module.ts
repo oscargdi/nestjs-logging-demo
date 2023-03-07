@@ -3,7 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { Request } from 'express';
 import { LoggerModule } from 'nestjs-pino';
-import { RequestLoggingInterceptor } from './interceptors/request-logging/request-logging.interceptor';
+import { HttpLoggingInterceptor } from './interceptors/http-logging/http-logging.interceptor';
 import {
   TraceIdMiddleware,
   TRACE_ID_HEADER,
@@ -41,7 +41,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
   providers: [
     {
       provide: APP_INTERCEPTOR,
-      useClass: RequestLoggingInterceptor,
+      useClass: HttpLoggingInterceptor,
     },
   ],
 })

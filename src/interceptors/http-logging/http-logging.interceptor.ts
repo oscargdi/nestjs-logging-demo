@@ -4,13 +4,13 @@ import {
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { Request } from 'express';
+import { Request, Response } from 'express';
 import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 
 @Injectable()
-export class RequestLoggingInterceptor implements NestInterceptor {
-  @InjectPinoLogger(RequestLoggingInterceptor.name)
+export class HttpLoggingInterceptor implements NestInterceptor {
+  @InjectPinoLogger(HttpLoggingInterceptor.name)
   private readonly logger: PinoLogger;
 
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {
@@ -28,6 +28,16 @@ export class RequestLoggingInterceptor implements NestInterceptor {
       },
       'Incoming HTTP request',
     );
-    return next.handle();
+    return next.handle().pipe(
+      tap(() =>
+        this.logger.info(
+          {
+            statusCode: context.switchToHttp().getResponse<Response>()
+              .statusCode,
+          },
+          'Returning HTTP response',
+        ),
+      ),
+    );
   }
 }
