@@ -4,19 +4,22 @@ import { InjectPinoLogger, PinoLogger } from 'nestjs-pino';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
-export class TransactionsService {
+export class ActivitiesService {
   constructor(
     private readonly httpService: HttpService,
-    @InjectPinoLogger(TransactionsService.name)
+    @InjectPinoLogger(ActivitiesService.name)
     private readonly logger: PinoLogger,
   ) {}
 
-  async getHello(): Promise<any> {
-    const { data } = await firstValueFrom(this.httpService.get('/entries'));
+  async getActivity(): Promise<any> {
+    const { data } = await firstValueFrom(
+      this.httpService.get('/api/activity'),
+    );
+    const { activity } = data;
     this.logger.info(
-      { operation: 'getHello', result: 'success' },
+      { operation: 'getActivity', result: 'success' },
       'Data was retrieved successfully',
     );
-    return data;
+    return { activity: activity };
   }
 }

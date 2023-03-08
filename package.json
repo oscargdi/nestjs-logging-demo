@@ -55,7 +55,7 @@
     }
   },
   "license": "UNLICENSED",
-  "name": "transactions",
+  "name": "activities",
   "private": true,
   "scripts": {
     "build": "nest build",

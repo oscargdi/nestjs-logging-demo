@@ -8,7 +8,7 @@ import {
   TraceIdMiddleware,
   TRACE_ID_HEADER,
 } from './middlewares/trace-id/trace-id.middleware';
-import { TransactionsModule } from './modules/transactions/transactions.module';
+import { ActivitiesModule } from './modules/activities/activities.module';
 
 @Module({
   imports: [
@@ -35,7 +35,7 @@ import { TransactionsModule } from './modules/transactions/transactions.module';
         },
       },
     }),
-    TransactionsModule,
+    ActivitiesModule,
   ],
   controllers: [],
   providers: [
