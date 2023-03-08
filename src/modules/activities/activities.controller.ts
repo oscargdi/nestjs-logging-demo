@@ -6,7 +6,7 @@ export class ActivitiesController {
   constructor(private readonly activitiesService: ActivitiesService) {}
 
   @Get()
-  getHello(): Promise<any> {
+  getActivity(): Promise<any> {
     return this.activitiesService.getActivity();
   }
 }

@@ -17,6 +17,7 @@ export abstract class HttpLoggingModule implements OnModuleInit {
           method: config.method.toUpperCase(),
           baseURL: config.baseURL,
           url: config.url,
+          data: config.data,
         },
         'Sending HTTP request',
       );
@@ -33,6 +34,7 @@ export abstract class HttpLoggingModule implements OnModuleInit {
           url: config.url,
           status: response.status,
           statusText: response.statusText,
+          data: response.data,
         },
         'Receiving HTTP response',
       );

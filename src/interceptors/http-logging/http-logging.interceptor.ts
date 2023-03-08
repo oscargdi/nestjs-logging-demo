@@ -25,15 +25,17 @@ export class HttpLoggingInterceptor implements NestInterceptor {
         contextType: contextType,
         controller: controller,
         handler: handler,
+        data: req.body,
       },
       'Incoming HTTP request',
     );
     return next.handle().pipe(
-      tap(() =>
+      tap((data) =>
         this.logger.info(
           {
             statusCode: context.switchToHttp().getResponse<Response>()
               .statusCode,
+            data: data,
           },
           'Returning HTTP response',
         ),

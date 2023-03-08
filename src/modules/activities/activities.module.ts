@@ -10,7 +10,7 @@ import { ActivitiesService } from './activities.service';
     HttpModule.registerAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        baseURL: configService.getOrThrow('SERVICES_BASE_URL'),
+        baseURL: configService.getOrThrow('SERVICES_BASE_URL'), // https://www.boredapi.com
       }),
       inject: [ConfigService],
     }),
