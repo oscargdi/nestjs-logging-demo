@@ -33,6 +33,7 @@ import { ActivitiesModule } from './modules/activities/activities.module';
             return undefined;
           },
         },
+        redact: ['data.key'],
       },
     }),
     ActivitiesModule,
