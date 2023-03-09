@@ -25,8 +25,8 @@ export class HttpLoggingInterceptor implements NestInterceptor {
         contextType: contextType,
         controller: controller,
         handler: handler,
-        params: req.query,
-        data: req.body,
+        params: Object.keys(req.query).length !== 0 ? req.query : undefined,
+        data: Object.keys(req.body).length !== 0 ? req.body : undefined,
       },
       'Incoming HTTP request',
     );
