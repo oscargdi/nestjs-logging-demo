@@ -21,10 +21,11 @@ export class HttpLoggingInterceptor implements NestInterceptor {
     this.logger.info(
       {
         method: req.method,
-        originalUrl: req.originalUrl,
+        path: req.path,
         contextType: contextType,
         controller: controller,
         handler: handler,
+        params: req.query,
         data: req.body,
       },
       'Incoming HTTP request',
