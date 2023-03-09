@@ -17,6 +17,7 @@ export abstract class HttpLoggingModule implements OnModuleInit {
           method: config.method.toUpperCase(),
           baseURL: config.baseURL,
           url: config.url,
+          params: config.params,
           data: config.data,
         },
         'Sending HTTP request',
@@ -25,13 +26,8 @@ export abstract class HttpLoggingModule implements OnModuleInit {
     });
 
     axios.interceptors.response.use((response) => {
-      const { config } = response;
-
       this.logger.info(
         {
-          method: config.method.toUpperCase(),
-          baseURL: config.baseURL,
-          url: config.url,
           status: response.status,
           statusText: response.statusText,
           data: response.data,
